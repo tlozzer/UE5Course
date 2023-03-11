@@ -10,6 +10,7 @@
 class UCapsuleComponent;
 class UInputMappingContext;
 class UInputAction;
+class UFloatingPawnMovement;
 
 
 UCLASS()
@@ -37,6 +38,9 @@ private:
 	
 	UPROPERTY(VisibleAnywhere) 
 	USkeletalMeshComponent* Mesh;
+
+	UPROPERTY(VisibleAnywhere)
+	UFloatingPawnMovement* BirdMovementComp;
 
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))

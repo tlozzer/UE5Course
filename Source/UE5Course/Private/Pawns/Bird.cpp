@@ -7,6 +7,7 @@
 #include "InputMappingContext.h"
 #include "EnhancedInputComponent.h"
 #include "InputAction.h"
+#include "GameFramework/FloatingPawnMovement.h"
 
 // Sets default values
 ABird::ABird()
@@ -19,6 +20,8 @@ ABird::ABird()
 	
 	Mesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Bird Skeletal Mesh"));
 	Mesh->SetupAttachment(GetRootComponent());
+
+	BirdMovementComp = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("Floating Movement Component"));
 }
 
 // Called when the game starts or when spawned
@@ -41,9 +44,9 @@ void ABird::BeginPlay()
 void ABird::Move(const FInputActionValue& Value)
 {
 	const float CurrentValue = Value.Get<float>();
-	if (CurrentValue != 0.f)
+	if ((GetController() != nullptr) && (CurrentValue != 0.f))
 	{
-		GEngine->AddOnScreenDebugMessage(INDEX_NONE, 1.f, FColor::Red, FString::Printf(TEXT("Value: %f"), CurrentValue));
+		AddMovementInput(GetActorForwardVector(), CurrentValue);
 	}
 }
 
