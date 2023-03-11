@@ -5,6 +5,8 @@
 #include "Components/CapsuleComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputMappingContext.h"
+#include "EnhancedInputComponent.h"
+#include "InputAction.h"
 
 // Sets default values
 ABird::ABird()
@@ -36,6 +38,15 @@ void ABird::BeginPlay()
 	}
 }
 
+void ABird::Move(const FInputActionValue& Value)
+{
+	const float CurrentValue = Value.Get<float>();
+	if (CurrentValue != 0.f)
+	{
+		GEngine->AddOnScreenDebugMessage(INDEX_NONE, 1.f, FColor::Red, FString::Printf(TEXT("Value: %f"), CurrentValue));
+	}
+}
+
 // Called every frame
 void ABird::Tick(float DeltaTime)
 {
@@ -48,5 +59,12 @@ void ABird::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	if (UEnhancedInputComponent* PlayerEnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		if (!MoveAction.IsNull())
+		{
+			PlayerEnhancedInputComponent->BindAction(MoveAction.LoadSynchronous(), ETriggerEvent::Triggered, this, &ABird::Move);
+		}
+	}
 }
 

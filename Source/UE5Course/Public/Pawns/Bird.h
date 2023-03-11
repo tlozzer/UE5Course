@@ -9,6 +9,8 @@
 // Forward declarations
 class UCapsuleComponent;
 class UInputMappingContext;
+class UInputAction;
+
 
 UCLASS()
 class UE5COURSE_API ABird : public APawn
@@ -32,9 +34,17 @@ protected:
 private:
 	UPROPERTY(VisibleAnywhere) 
 	UCapsuleComponent* CapsuleCollision;
+	
 	UPROPERTY(VisibleAnywhere) 
 	USkeletalMeshComponent* Mesh;
 
+	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	TSoftObjectPtr<UInputMappingContext> BirdMappingContext;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	TSoftObjectPtr<UInputAction> MoveAction;
+
+	UFUNCTION()
+	void Move(const FInputActionValue& Value);
 };
