@@ -8,6 +8,8 @@
 #include "EnhancedInputComponent.h"
 #include "InputAction.h"
 #include "GameFramework/FloatingPawnMovement.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "Camera/CameraComponent.h"
 
 // Sets default values
 ABird::ABird()
@@ -20,6 +22,12 @@ ABird::ABird()
 	
 	Mesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Bird Skeletal Mesh"));
 	Mesh->SetupAttachment(GetRootComponent());
+
+	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
+	SpringArm->SetupAttachment(GetRootComponent());
+
+	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("Follow Camera"));
+	FollowCamera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
 
 	BirdMovementComp = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("Floating Movement Component"));
 }

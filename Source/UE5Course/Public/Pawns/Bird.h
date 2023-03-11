@@ -11,6 +11,8 @@ class UCapsuleComponent;
 class UInputMappingContext;
 class UInputAction;
 class UFloatingPawnMovement;
+class UCameraComponent;
+class USpringArmComponent;
 
 
 UCLASS()
@@ -41,6 +43,12 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	UFloatingPawnMovement* BirdMovementComp;
+
+	UPROPERTY(VisibleAnywhere)
+	UCameraComponent* FollowCamera;
+
+	UPROPERTY(VisibleAnywhere)
+	USpringArmComponent* SpringArm;
 
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
