@@ -3,6 +3,8 @@
 
 #include "Pawns/Bird.h"
 #include "Components/CapsuleComponent.h"
+#include "EnhancedInputSubsystems.h"
+#include "InputMappingContext.h"
 
 // Sets default values
 ABird::ABird()
@@ -22,6 +24,16 @@ void ABird::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
+		{
+			if (!BirdMappingContext.IsNull())
+			{
+				Subsystem->AddMappingContext(BirdMappingContext.LoadSynchronous(), 0);
+			}
+		}
+	}
 }
 
 // Called every frame

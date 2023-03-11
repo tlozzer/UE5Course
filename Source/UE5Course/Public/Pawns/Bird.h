@@ -8,6 +8,7 @@
 
 // Forward declarations
 class UCapsuleComponent;
+class UInputMappingContext;
 
 UCLASS()
 class UE5COURSE_API ABird : public APawn
@@ -29,6 +30,11 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	UPROPERTY(VisibleAnywhere) UCapsuleComponent* CapsuleCollision;
-	UPROPERTY(VisibleAnywhere) USkeletalMeshComponent* Mesh;
+	UPROPERTY(VisibleAnywhere) 
+	UCapsuleComponent* CapsuleCollision;
+	UPROPERTY(VisibleAnywhere) 
+	USkeletalMeshComponent* Mesh;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	TSoftObjectPtr<UInputMappingContext> BirdMappingContext;
 };
