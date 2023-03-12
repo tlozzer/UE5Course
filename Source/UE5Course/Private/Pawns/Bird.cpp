@@ -32,6 +32,7 @@ ABird::ABird()
 	BirdMovementComp = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("Floating Movement Component"));
 
 	bUseControllerRotationYaw = true;
+	bUseControllerRotationPitch = true;
 }
 
 // Called when the game starts or when spawned
@@ -65,6 +66,11 @@ void ABird::Turn(const FInputActionValue& Value)
 	AddControllerYawInput(Value.Get<float>());
 }
 
+void ABird::Look(const FInputActionValue& Value)
+{
+	AddControllerPitchInput(Value.Get<float>());
+}
+
 // Called every frame
 void ABird::Tick(float DeltaTime)
 {
@@ -87,6 +93,11 @@ void ABird::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		if (!TurnAction.IsNull())
 		{
 			PlayerEnhancedInputComponent->BindAction(TurnAction.LoadSynchronous(), ETriggerEvent::Triggered, this, &ABird::Turn);
+		}
+
+		if (!LookAction.IsNull())
+		{
+			PlayerEnhancedInputComponent->BindAction(LookAction.LoadSynchronous(), ETriggerEvent::Triggered, this, &ABird::Look);
 		}
 	}
 }
