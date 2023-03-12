@@ -57,6 +57,9 @@ private:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	TSoftObjectPtr<UInputAction> MoveAction;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	TSoftObjectPtr<UInputAction> TurnAction;
+
 	UFUNCTION()
 	void Move(const FInputActionValue& Value);
 };
