@@ -64,14 +64,11 @@ void ABird::Move(const FInputActionValue& Value)
 	}
 }
 
-void ABird::Turn(const FInputActionValue& Value)
-{
-	AddControllerYawInput(Value.Get<float>());
-}
-
 void ABird::Look(const FInputActionValue& Value)
 {
-	AddControllerPitchInput(Value.Get<float>());
+	FVector2D LookVector = Value.Get<FVector2D>();
+	AddControllerYawInput(LookVector.X);
+	AddControllerPitchInput(LookVector.Y);
 }
 
 // Called every frame
@@ -91,11 +88,6 @@ void ABird::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		if (!MoveAction.IsNull())
 		{
 			PlayerEnhancedInputComponent->BindAction(MoveAction.LoadSynchronous(), ETriggerEvent::Triggered, this, &ABird::Move);
-		}
-
-		if (!TurnAction.IsNull())
-		{
-			PlayerEnhancedInputComponent->BindAction(TurnAction.LoadSynchronous(), ETriggerEvent::Triggered, this, &ABird::Turn);
 		}
 
 		if (!LookAction.IsNull())
