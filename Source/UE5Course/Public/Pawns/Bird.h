@@ -62,4 +62,7 @@ private:
 
 	UFUNCTION()
 	void Move(const FInputActionValue& Value);
+
+	UFUNCTION()
+	void Turn(const FInputActionValue& Value);
 };
