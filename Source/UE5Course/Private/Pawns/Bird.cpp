@@ -19,6 +19,9 @@ ABird::ABird()
 
 	CapsuleCollision = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Bird Collision Capsule"));
 	SetRootComponent(CapsuleCollision);
+	CapsuleCollision->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	CapsuleCollision->SetCollisionObjectType(ECollisionChannel::ECC_WorldDynamic);
+	CapsuleCollision->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Block);
 	
 	Mesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Bird Skeletal Mesh"));
 	Mesh->SetupAttachment(GetRootComponent());
