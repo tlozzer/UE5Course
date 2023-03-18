@@ -1,1 +1,5 @@
 Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset filter=lfs diff=lfs merge=lfs -text
+Content/AncientContent/Characters/Echo/Meshes/*.* filter=lfs diff=lfs merge=lfs -text
+Content/AncientContent/Characters/Echo/Textures/*.* filter=lfs diff=lfs merge=lfs -text
+Content/AncientContent/Characters/Echo/Textures/Costume/*.* filter=lfs diff=lfs merge=lfs -text
+Content/AncientContent/Characters/Echo/Textures/Head/*.* filter=lfs diff=lfs merge=lfs -text
